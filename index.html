@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <title>Visor Monitoreo Urbano</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+
+
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body, #top {
+            background: #ffffff;
+            width: 100%;
+            height: 40px;
+            left: 15px;
+            float: top;
+        }
+
+
+        .container {
+            position: absolute;
+            top: 23%;
+            left: 10px;
+            z-index: 999;
+            background-color: #FFFFFF;
+            padding: 10px;
+            border-radius: 7px;
+            font: 10px/12px Segoe UI, Segoe UI, Segoe UI;
+        }
+
+        #logoContainer {
+            position: absolute;
+            z-index: 999;
+            bottom: 15px;
+            left: 80%;
+            float: right;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #legend {
+            background: #ffffff;
+            position: absolute;
+            z-index: 999;
+            bottom: 20px;
+            left: 10px;
+            padding: 0px 10px;
+            width: 200px;
+            -webkit-border-radius: 4px 4px 4px 4px;
+            border-radius: 4px 4px 4px 4px;
+            float: left;
+            font: 10px/12px Segoe UI, Segoe UI, Segoe UI;
+            text-align: left;
+        }
+
+        #legend,
+        #colors {
+            font: 10px/12px Segoe UI, Segoe UI, Segoe UI;
+            text-align: left;
+        }
+
+        .btn-group .button {
+            position: absolute;
+            z-index: 999;
+            background: #ffffff;
+            background: rgba(255, 255, 255, 0.8);
+            border: rgb(255, 255, 255);
+            font: 10px/12px Segoe UI, Segoe UI, Segoe UI;
+            width: 200px;
+            left: 10px;
+            cursor: pointer;
+            float: left;
+        }
+
+        .btn-group .button:hover {
+            background-color: #a7ada7;
+        }
+
+        select {
+            font: 10px/12px Segoe UI, Segoe UI, Segoe UI;
+            border: 1px solid transparent;
+        }
+
+        p {
+            font: 10px/12px Segoe UI, Segoe UI, Segoe UI;
+
+        }
+
+        .info {
+            padding: 5px 12px;
+            font: 10px/12px Segoe UI, Segoe UI, Segoe UI;
+            background: white;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        .info h4 {
+            margin: 0 0 5px;
+            color: #777;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+<script src="data/Grilla.js"></script>
+<script src="data/Corregimiento.js"></script>
+
+<div id="map">
+    <div id='legend'>
+    </div>
+    <script src='src/map.js'></script>
+
+    <div class="container">
+        <b>Seleccione indicador:</b>
+        <div class="custom-select">
+        <select name="layers" onclick= 'changeIndi(this);'>
+            <optgroup label="Vivienda"></optgroup>
+            <option id="VIV_DUR" value="VIV_DUR">Vivienda adecuada</option>
+            <option id="ESP_VIT" value="ESP_VIT">Espacio vital suficiente</option>
+            <option id="AGU_MEJ" value="AGU_MEJ">Acceso a agua mejorada</option>
+            <option id="SAN_ADE" value="SAN_ADE">Acceso a saneamiento</option>   
+            <option id="ACC_ELE" value="ACC_ELE">Acceso a electricidad</option> 
+            <option id="ACC_INT" value="ACC_INT">Acceso a internet</option> 
+            </optgroup>
+            <optgroup label="Salud"></optgroup>
+            <option id="DxP_SALUD" value="DxP_SALUD">Proximidad centros salud</option>
+            <option id="CON_SOL" value="CON_SOL">Contaminación de residuos sólidos</option>
+            </optgroup>
+            <optgroup label="Educación, cultura y diversidad"></optgroup>
+            <option id="DxP_BIBLIO" value="DxP_BIBLIO">Proximidad equipamientos culturales</option>
+            <option id="DxP_EDUCA" value="DxP_EDUCA">Proximidad equipamientos educativos</option>
+            </optgroup>
+            <optgroup label="Espacios públicos, seguridad, recreación"></optgroup>
+            <option id="DxP_EP" value="DxP_EP">Proximidad espacio público</option>  
+            <option id="Dens_Res" value="Dens_Res" selected>Densidad residencial</option> 
+            <option id="Shannon" value="Shannon">Diversidad usos del suelo</option> 
+            </optgroup> 
+            <optgroup label="Oportunidades económicas"></optgroup>
+            <option id="DESEMPL" value="DESEMPL">Tasa de desempleo</option>
+            <option id="EMP_INF" value="EMP_INF">Empleo informal</option>
+            <option id="Desemp_Juv" value="Desemp_Juv">Desempleo juvenil</option>   
+            </optgroup> 
+        </select>
+    </div>
+    </div>
+
+    <div id="logoContainer">
+        <img src="images/logo1.png" width="100%">
+    </div>
+    
+    <div id="logoContainer">
+        <img src="images/logo1.png" width="100%">
+    </div>
+
+</div>
+
+
+</body>
+</html>
+
