@@ -61,6 +61,7 @@ info.update = function (props) {
         '<b>Espacios públicos, seguridad y recreación </b>' + '<br />' +
         'Proximidad espacio público: ' + props.DxP_EP.toFixed(0) + ' m' + '<br />' +
         'Densidad residencial: ' + props.Dens_Res.toFixed(2) +'<br />' + 
+        'Tasa de homicidios x 100mil habitantes: ' + props.HOMICI +'<br />' +
         'Diversidad usos del suelo: ' + props.Shannon.toFixed(2) + '/1.61' +'<br />' + '<br />' +
 
         '<b>Oportunidades económicas </b>' + '<br />' +
@@ -164,7 +165,7 @@ var legends = {
         elem5: '<div><span  style= "color:#d7191c">▉</span>5001 - 11135</div>',
         elem6: '<br />Factor de inclinación del terreno <br />A nivel: 1<br /> Ligeramente inclinada: 1.25<br /> Moderadamente inclinada: 1.5<br /> Fuertemente inclinada: 1.75<br /> Escarpada: 2<br />',
         elem7: '',
-        elem8: "Alcaldía de Manta 2020",
+        elem8: "Ministerio de Salud 2021",
     },
     DxP_EDUCA: {
         title: "Proximidad equipamientos de educación",
@@ -176,7 +177,7 @@ var legends = {
         elem5: '<div><span  style= "color:#d7191c">▉</span>5001 - 7749</div>',
         elem6: '<br />Factor de inclinación del terreno <br />A nivel: 1<br /> Ligeramente inclinada: 1.25<br /> Moderadamente inclinada: 1.5<br /> Fuertemente inclinada: 1.75<br /> Escarpada: 2<br />',
         elem7: '',
-        elem8: "Alcaldía de Manta 2020",
+        elem8: "Alcaldía de Panamá 2021",
     },
     DxP_BIBLIO: {
         title: "Proximidad equipamientos culturales",
@@ -188,7 +189,7 @@ var legends = {
         elem5: '<div><span  style= "color:#d7191c">▉</span>20001 - 40293</div>',
         elem6: '<br />Factor de inclinación del terreno <br />A nivel: 1<br /> Ligeramente inclinada: 1.25<br /> Moderadamente inclinada: 1.5<br /> Fuertemente inclinada: 1.75<br /> Escarpada: 2<br />',
         elem7: '',
-        elem8: "Google Earth 2021",
+        elem8: "Google Earth y Biblioteca Nacional de Panamá 2021",
     },
     DxP_EP: {
         title: "Proximidad espacio público",
@@ -224,7 +225,7 @@ var legends = {
         elem5: '<div><span  style= "color:#d7191c">▉</span>16 - 66</div>',
         elem6: '',
         elem7: '',
-        elem8: "INEC Censo de Población y Vivienda 2010",
+        elem8: "INEC Censo Nacional de Población y Vivienda 2010",
     },
     ESP_VIT: {
         title: "Espacio vital suficiente",
@@ -236,7 +237,7 @@ var legends = {
         elem5: '<div><span  style= "color:#d7191c">▉</span>0 - 30</div>',
         elem6: '',
         elem7: '',
-        elem8: "INEC Censo de Población y Vivienda 2010",
+        elem8: "INEC Censo Nacional de Población y Vivienda 2010",
     },
     AGU_MEJ: {
         title: "Acceso a agua mejorada",
@@ -248,7 +249,7 @@ var legends = {
         elem5: '<div><span  style= "color:#d7191c">▉</span>6 - 47</div>',
         elem6: '',
         elem7: '',
-        elem8: "INEC Censo de Población y Vivienda 2010",
+        elem8: "INEC Censo Nacional de Población y Vivienda 2010",
     },
     SAN_ADE: {
         title: "Acceso a saneamiento",
@@ -260,7 +261,7 @@ var legends = {
         elem5: '<div><span  style= "color:#d7191c">▉</span>1 - 27</div>',
         elem6: '',
         elem7: '',
-        elem8: "INEC Censo de Población y Vivienda 2010",
+        elem8: "INEC Censo Nacional de Población y Vivienda 2010",
     },
     ACC_ELE: {
         title: "Acceso a electricidad",
@@ -272,7 +273,7 @@ var legends = {
         elem5: '<div><span  style= "color:#d7191c">▉</span>2 - 45</div>',
         elem6: '',
         elem7: '',
-        elem8: "INEC Censo de Población y Vivienda 2010",
+        elem8: "INEC Censo Nacional de Población y Vivienda 2010",
     },
     ACC_INT: {
         title: "Acceso a internet",
@@ -284,7 +285,7 @@ var legends = {
         elem5: '<div><span  style= "color:#d7191c">▉</span>0 - 14</div>',
         elem6: '',
         elem7: '',
-        elem8: "INEC Censo de Población y Vivienda 2010",
+        elem8: "INEC Censo Nacional de Población y Vivienda 2010",
     },
     CON_SOL: {
         title: "Contaminación residuos sólidos",
@@ -296,7 +297,7 @@ var legends = {
         elem5: '<div><span  style= "color:#d7191c">▉</span>66 - 100</div>',
         elem6: '',
         elem7: '',
-        elem8: "INEC Censo de Población y Vivienda 2010",
+        elem8: "INEC Censo Nacional de Población y Vivienda 2010",
     },
     M2_EP_CA: {
         title: "M² per capita de espacio público",
@@ -320,31 +321,19 @@ var legends = {
         elem5: '<div><span  style= "color:#d7191c">▉</span>10001 - 38612</div>',
         elem6: '',
         elem7: '',
-        elem8: "INEC Censo de Población y Vivienda 2010",
+        elem8: "INEC Censo Nacional de Población y Vivienda 2010",
     },
-    Tasa_Hurto: {
-        title: "Tasa de hurtos",
-        subtitle: "Hurtos x 100mil habitantes",
-        elem1: '<div><span  style= "color:#1a9641">▉</span>169.3 - 395.5</div>',
-        elem2: '<div><span  style= "color:#a6d96a">▉</span>395.6 - 716.2</div>', 
-        elem3: '<div><span  style= "color:#f4f466">▉</span>716.3 - 1256.4</div>',
-        elem4: '<div><span  style= "color:#fdae61">▉</span>1256.5 - 2357.0</div>',
-        elem5: '<div><span  style= "color:#d7191c">▉</span>2357.1 - 4856.9</div>',
-        elem6: '',
-        elem7: '',
-        elem8: "Observatorio Metropolitano de Seguridad Ciudadana 2019",
-    },
-    Tasa_Homic: {
+    T_Homici_2: {
         title: "Tasa de homicidios",
         subtitle: "Homicidios x 100mil habitantes",
-        elem1: '<div><span  style= "color:#1a9641">▉</span>0.0 - 1.5</div>',
-        elem2: '<div><span  style= "color:#a6d96a">▉</span>1.6 - 4.0</div>', 
-        elem3: '<div><span  style= "color:#f4f466">▉</span>4.1 - 7.3</div>',
-        elem4: '<div><span  style= "color:#fdae61">▉</span>7.4 - 12.0</div>',
-        elem5: '<div><span  style= "color:#d7191c">▉</span>12.1 - 23.2</div>',
-        elem6: '',
+        elem1: '<div><span  style= "color:#1a9641">▉</span>2.89 - 4.94</div>',
+        elem2: '<div><span  style= "color:#a6d96a">▉</span>4.95 - 11.34</div>', 
+        elem3: '<div><span  style= "color:#f4f466">▉</span>11.35 - 21.92</div>',
+        elem4: '<div><span  style= "color:#fdae61">▉</span>21.93 - 38.09</div>',
+        elem5: '<div><span  style= "color:#d7191c">▉</span>38.10 - 68.17</div>',
+        elem6: '<div><span  style= "color:#c3bfc2">▉</span>Sin información</div>',
         elem7: '',
-        elem8: "Observatorio Metropolitano de Seguridad Ciudadana 2019",
+        elem8: "Ministerio de Seguridad Pública 2020",
     },
     Shannon: {
         title: "Diversidad usos del suelo",
@@ -368,7 +357,7 @@ var legends = {
         elem5: '<div><span  style= "color:#d7191c">▉</span>6.55 - 15.74</div>',
         elem6: '',
         elem7: '',
-        elem8: "INEC Censo de Población y Vivienda 2010",
+        elem8: "INEC Censo Nacional de Población y Vivienda 2010",
     },
     EMP_INF: {
         title: "Empleo informal",
@@ -380,7 +369,7 @@ var legends = {
         elem5: '<div><span  style= "color:#d7191c">▉</span>29.89 - 49.93</div>',
         elem6: '',
         elem7: '',
-        elem8: "INEC Censo de Población y Vivienda 2010",
+        elem8: "INEC Censo Nacional de Población y Vivienda 2010",
     },
     Desemp_Juv: {
         title: "Desempleo juvenil",
@@ -392,7 +381,7 @@ var legends = {
         elem5: '<div><span  style= "color:#d7191c">▉</span>12.67 - 29.27</div>',
         elem6: '',
         elem7: '',
-        elem8: "INEC Censo de Población y Vivienda 2010",
+        elem8: "INEC Censo Nacional de Población y Vivienda 2010",
     },
 }
 
@@ -507,12 +496,13 @@ function setProColor(d) {
                     d > 395.5 ? '#a6d96a' :
                     '#1a9641';
     }
-    else if (currentStyle === 'Tasa_Homic') {
-        return d > 12 ?  '#d7191c':
-            d > 7.3 ? '#fdae61' :
-                d > 4 ? '#f4f466' :
-                    d > 1.5 ? '#a6d96a' :
-                    '#1a9641';
+    else if (currentStyle === 'T_Homici_2') {
+        return d > 38.09 ?  '#d7191c':
+            d > 21.92 ? '#fdae61' :
+                d > 11.34 ? '#f4f466' :
+                    d > 4.94 ? '#a6d96a' :
+                    d > 2.8 ? '#1a9641':
+                    '#c3bfc2';
     }
     else if (currentStyle === 'Shannon') {
         return d > 0.64 ? '#1a9641' :
