@@ -345,7 +345,7 @@ var legends = {
         elem5: '<div><span  style= "color:#d7191c">▉</span>0.00 - 0.09</div>',
         elem6: '',
         elem7: '',
-        elem8: "Plan de Uso y Ocupación del Suelo 2020",
+        elem8: "Alcaldía de Panamá y Plan de Desarrollo Urbano de las Áreas Metropolitanas del Pacífico 2020",
     },
     DESEMPL: {
         title: "Tasa de desempleo",
